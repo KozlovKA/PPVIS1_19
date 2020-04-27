@@ -23,12 +23,12 @@ public class Last {
     public static int WINDOW_NUMBER = 0;
 
 
-    public static void shellSwap(Shell shell,int num) throws InterruptedException {
-        int[] xLocation = new int[]{100, 150, 300, 300, 100};
-        int[] yLocation = new int[]{300, 400, 300, 100, 100};
-
-
-        shell.setLocation(xLocation[num], yLocation[num]);
+    public static void shellSwap(Shell shell, int num,ArrayList<int[]> coordinates) throws InterruptedException {
+        int[] xCoordinate;
+        int[] yCoordinate;
+        xCoordinate = coordinates.get(num+1);
+        yCoordinate = coordinates.get(num+1);
+        shell.setLocation(xCoordinate[0],yCoordinate[1]);
 
     }
 
@@ -38,26 +38,48 @@ public class Last {
         shell.setSize(250, 250);
         shell.setLocation(0, 0);
 
-        return(shell);
+        return (shell);
+    }
+    public static ArrayList<int[]> getCoordinates(int coordNumber) {
+        ArrayList<int[]> listOfNumbers = new ArrayList<>();
+
+        int x0 = 500;
+        int y0 = 500;
+        int r = 300;
+
+        for (int i = 1; i < coordNumber + 1; i++) {
+            float angle = i * (360 / coordNumber);
+
+            int x = (int) (x0 + r * Math.cos(Math.toRadians(angle)));
+            int y = (int) (y0 + r * Math.sin(Math.toRadians(angle)));
+
+            x = (int) x;
+            y = (int) y;
+
+            int[] point = new int[]{x, y};
+            listOfNumbers.add(point);
+        }
+
+
+        return listOfNumbers;
     }
 
-    public static void setCircle(ArrayList<Shell> shells) {
-        int[] xCircle = new int[]{100, 100, 150, 300, 300};
-        int[] yCircle = new int[]{100, 300, 400, 300, 100};
-
+    public static void setCircle(ArrayList<Shell> shells, ArrayList<int[]> coordinates) {
+        int[] xCoordinate;
+        int[] yCoordinate;
         int idx = 0;
-        for(Shell shell_temp: shells) {
-            shell_temp.setLocation(xCircle[idx], yCircle[idx]);
+        for (Shell shell_temp : shells) {
+            xCoordinate = coordinates.get(idx);
+            yCoordinate = coordinates.get(idx);
+            shell_temp.setLocation(xCoordinate[0],yCoordinate[1]);
 
             idx++;
         }
     }
 
 
-
-
     public static void openShells(ArrayList<Shell> shells) {
-        for(Shell shell_temp: shells) {
+        for (Shell shell_temp : shells) {
             shell_temp.open();
         }
     }
@@ -79,16 +101,15 @@ public class Last {
 
 
     public static void main(String[] args) throws InterruptedException {
-
+        int[] x;
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setText("Main");
         shell.setSize(550, 550);
-
         shell.open();
-
+        ArrayList<int[]> coordinatesXY;
         ArrayList<Shell> shells = new ArrayList<Shell>();
-
+        coordinatesXY = getCoordinates(6);
         Shell shell1 = addShell(display);
         shell1.setText("First");
         shells.add(shell1);
@@ -104,6 +125,21 @@ public class Last {
         Shell shell5 = addShell(display);
         shell5.setText("Fifth");
         shells.add(shell5);
+        ComboBox comboBox = new ComboBox();
+        comboBox.getTask(shell);
+        SwapNames swap = new SwapNames();
+        swap.getTask2(shell);
+        RadioButton radioButon = new RadioButton();
+        radioButon.getTask3(shell);
+        CheckButton checkButton = new CheckButton();
+        checkButton.getTask4(shell);
+        TableWidget widget = new TableWidget();
+        widget.getTable(shell, display);
+        comboBox.getTask(shell1);
+        swap.getTask2(shell2);
+        radioButon.getTask3(shell3);
+        checkButton.getTask4(shell4);
+        widget.getTable(shell5, display);
 
 
         display.addFilter(SWT.KeyDown, new Listener() {
@@ -118,7 +154,7 @@ public class Last {
                 list.add(Character.toString((char) ke.keyCode));
 
 
-                if ((list.size() == 2) & !OPENED){
+                if ((list.size() == 2) & !OPENED) {
                     if ((list.get(0).equals("CTRL"))
                             & (list.get(1).equals("r"))) {
                         System.out.println("Check1");
@@ -144,8 +180,6 @@ public class Last {
         });
 
 
-        int count = 0;
-
         while (!shell.isDisposed()) {
 
             if (TO_CONTINUE & TO_STOP & display.readAndDispatch()) {
@@ -160,7 +194,7 @@ public class Last {
 
             } else {
 
-                if (WAIT_A_SECOND){
+                if (WAIT_A_SECOND) {
                     WAIT_A_SECOND = !oneSecondPassCheck();
 
 
@@ -183,16 +217,16 @@ public class Last {
                 }
 
                 if (!WAIT_A_SECOND & TO_CIRCLE) {
-                    setCircle(shells);
+                    setCircle(shells, coordinatesXY);
                     WAIT_A_SECOND = true;
                     TO_CIRCLE = false;
                     TO_SWAP = true;
                 }
 
                 if (!WAIT_A_SECOND & TO_SWAP) {
-                    shellSwap(shells.get(WINDOW_NUMBER),WINDOW_NUMBER);
+                    shellSwap(shells.get(WINDOW_NUMBER), WINDOW_NUMBER,coordinatesXY);
                     WAIT_A_SECOND = true;
-                    WINDOW_NUMBER += 1;
+                    ++WINDOW_NUMBER;
 
                     if (WINDOW_NUMBER == 5) {
                         WINDOW_NUMBER = 0;
