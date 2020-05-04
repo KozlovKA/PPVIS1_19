@@ -126,20 +126,20 @@ public class Last {
         shell5.setText("Fifth");
         shells.add(shell5);
         ComboBox comboBox = new ComboBox();
-        comboBox.getTask(shell);
+        comboBox.getComboBoxTask(shell);
         SwapNames swap = new SwapNames();
-        swap.getTask2(shell);
-        RadioButton radioButon = new RadioButton();
-        radioButon.getTask3(shell);
+        swap.getSwapNamesTask(shell);
+        RadioButton radioButton = new RadioButton();
+        radioButton.getRadioButtonTask(shell);
         CheckButton checkButton = new CheckButton();
-        checkButton.getTask4(shell);
-        TableWidget widget = new TableWidget();
-        widget.getTable(shell, display);
-        comboBox.getTask(shell1);
-        swap.getTask2(shell2);
-        radioButon.getTask3(shell3);
-        checkButton.getTask4(shell4);
-        widget.getTable(shell5, display);
+        checkButton.getCheckButtonTask(shell);
+        TableWidget tableWidget = new TableWidget();
+        tableWidget.getTableTask(shell);
+        comboBox.getComboBoxTask(shell1);
+        swap.getSwapNamesTask(shell2);
+        radioButton.getRadioButtonTask(shell3);
+        checkButton.getCheckButtonTask(shell4);
+        tableWidget.getTableTask(shell5);
 
 
         display.addFilter(SWT.KeyDown, new Listener() {
