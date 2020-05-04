@@ -5,7 +5,7 @@ import org.eclipse.swt.widgets.*;
 
 public class ComboBox {
 
-	void getTask(Shell shell)
+	void getComboBoxTask(Shell shell)
 	{
 
 
