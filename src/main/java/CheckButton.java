@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CheckButton {
 	
-	void getTask4(Shell shell)
+	void getCheckButtonTask(Shell shell)
 	{
 		Button buttonForAddMark = new Button(shell, SWT.PUSH);
 	    Text nameField = new Text(shell, SWT.CENTER);
