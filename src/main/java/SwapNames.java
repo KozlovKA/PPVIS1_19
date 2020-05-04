@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class SwapNames {
 	
-	void getTask2(Shell shell) {
+	void getSwapNamesTask(Shell shell) {
 		
 	    Button replaceForSecondButton = new Button(shell, SWT.PUSH);
 	    Button replaceForFirstButton = new Button(shell, SWT.PUSH);
