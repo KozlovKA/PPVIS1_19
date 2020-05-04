@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class RadioButton {
 	
-	void getTask3(Shell shell)
+	void getRadioButtonTask(Shell shell)
 	{
 		Button addMark = new Button(shell, SWT.PUSH);
 	    Text text3 = new Text(shell, SWT.CENTER);
