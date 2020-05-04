@@ -11,7 +11,7 @@ public class TableWidget {
 	private  String it2;
 	private  int index;
 	
-	public void getTable(Shell shell, Display display) {
+	public void getTableTask(Shell shell, Display display) {
 		
 		Text nameField = new Text(shell, SWT.CENTER);
 		nameField.setBounds(450, 60, 200, 30);
